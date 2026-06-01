@@ -45,11 +45,32 @@ export class CadastrarProdutoPage {
     cy.get(this.seletores.cadastrarButton).click()
   }
 
+  tentarCadastrarProdutoSemPreencherCampos() {
+    this.cadastrar()
+  }
+
   deveCadastrarProdutoComSucesso() {
     cy.wait('@cadastrarProduto').then(({ response }) => {
       expect(response.statusCode).to.eq(201)
       expect(response.body.message).to.eq('Cadastro realizado com sucesso')
       expect(response.body._id).to.exist
     })
+  }
+
+  deveExibirMensagensDeCamposObrigatorios() {
+    const mensagensObrigatorias = [
+      'Nome é obrigatório',
+      'Preco é obrigatório',
+      'Descricao é obrigatório',
+      'Quantidade é obrigatório',
+    ]
+
+    mensagensObrigatorias.forEach((mensagem) => {
+      cy.contains('.alert', mensagem).should('be.visible')
+    })
+  }
+
+  devePermanecerNaTelaDeCadastro() {
+    cy.location('pathname').should('include', '/admin/cadastrarprodutos')
   }
 }

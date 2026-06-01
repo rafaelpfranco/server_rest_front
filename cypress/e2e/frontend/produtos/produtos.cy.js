@@ -22,4 +22,12 @@ describe('Produtos', () => {
     listarProdutosPage.deveEstarCarregada()
     listarProdutosPage.deveListarProduto(produto)
   })
+
+  it('Validar cadastro de produto com dados em branco', () => {
+    cadastrarProdutoPage.visitar()
+    cadastrarProdutoPage.deveEstarCarregada()
+    cadastrarProdutoPage.tentarCadastrarProdutoSemPreencherCampos()
+    cadastrarProdutoPage.deveExibirMensagensDeCamposObrigatorios()
+    cadastrarProdutoPage.devePermanecerNaTelaDeCadastro()
+  })
 })
