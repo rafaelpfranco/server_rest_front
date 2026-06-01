@@ -49,6 +49,13 @@ export class CadastrarProdutoPage {
     this.cadastrar()
   }
 
+  cadastrarProduto(produto) {
+    this.preencherFormulario(produto)
+    this.interceptarCadastroProduto()
+    this.cadastrar()
+    this.deveCadastrarProdutoComSucesso()
+  }
+
   deveCadastrarProdutoComSucesso() {
     cy.wait('@cadastrarProduto').then(({ response }) => {
       expect(response.statusCode).to.eq(201)

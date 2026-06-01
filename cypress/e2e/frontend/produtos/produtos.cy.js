@@ -14,10 +14,7 @@ describe('Produtos', () => {
 
     cadastrarProdutoPage.visitar()
     cadastrarProdutoPage.deveEstarCarregada()
-    cadastrarProdutoPage.preencherFormulario(produto)
-    cadastrarProdutoPage.interceptarCadastroProduto()
-    cadastrarProdutoPage.cadastrar()
-    cadastrarProdutoPage.deveCadastrarProdutoComSucesso()
+    cadastrarProdutoPage.cadastrarProduto(produto)
 
     listarProdutosPage.deveEstarCarregada()
     listarProdutosPage.deveListarProduto(produto)
@@ -29,5 +26,17 @@ describe('Produtos', () => {
     cadastrarProdutoPage.tentarCadastrarProdutoSemPreencherCampos()
     cadastrarProdutoPage.deveExibirMensagensDeCamposObrigatorios()
     cadastrarProdutoPage.devePermanecerNaTelaDeCadastro()
+  })
+
+  it('Validar exclusão de produto', () => {
+    listarProdutosPage.visitar()
+    listarProdutosPage.deveEstarCarregada()
+    listarProdutosPage.obterNomePrimeiroProdutoAutomatizado().then((nomeProduto) => {
+      listarProdutosPage.interceptarExclusaoProduto()
+      listarProdutosPage.excluirProdutoPorNome(nomeProduto)
+      listarProdutosPage.deveExcluirProdutoComSucesso()
+      listarProdutosPage.deveEstarCarregada()
+      listarProdutosPage.naoDeveListarProduto(nomeProduto)
+    })
   })
 })
