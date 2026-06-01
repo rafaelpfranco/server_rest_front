@@ -13,7 +13,6 @@ module.exports = defineConfig({
   env: {
     userEmail: process.env.USER_EMAIL,
     userPassword: process.env.USER_PASSWORD,
-    tipoTeste: process.env.TIPO_TESTE || 'regressivo',
   },
   video: true,
   screenshotsFolder: 'cypress/screenshots',
