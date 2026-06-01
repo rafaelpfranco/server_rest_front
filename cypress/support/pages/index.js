@@ -1,2 +1,3 @@
 export { LoginPage } from './login/LoginPage'
-export { ProdutosPage } from './produtos/ProdutosPage'
+export { CadastrarProdutoPage } from './produtos/CadastrarProdutoPage'
+export { ListarProdutosPage } from './produtos/ListarProdutosPage'

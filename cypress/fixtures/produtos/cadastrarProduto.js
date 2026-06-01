@@ -5,4 +5,5 @@ export const criarProduto = () => ({
   preco: 100,
   descricao: 'Produto criado para automacao frontend',
   quantidade: 10,
+  imagem: 'cypress/fixtures/produtos/produto.jpeg',
 })
