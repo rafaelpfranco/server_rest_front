@@ -28,7 +28,7 @@ describe('Produtos', () => {
     cadastrarProdutoPage.devePermanecerNaTelaDeCadastro()
   })
 
-  it('Validar exclusão de produto cadastrado', () => {
+  it('Validar exclusão de produto', () => {
     listarProdutosPage.visitar()
     listarProdutosPage.deveEstarCarregada()
     listarProdutosPage.obterNomePrimeiroProdutoAutomatizado().then((nomeProduto) => {

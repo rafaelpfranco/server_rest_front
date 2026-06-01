@@ -48,12 +48,11 @@ O sistema deve impedir o cadastro do produto e exibir as mensagens de obrigatori
 
 1. Acessar o frontend do ServeRest.
 2. Realizar login com um usuário administrador válido.
-3. Cadastrar um produto com dados válidos para ser usado como massa do teste.
-4. Acessar a tela de listagem de produtos.
-5. Localizar o produto cadastrado pelo nome.
-6. Acionar a opção de exclusão na mesma linha do produto.
-7. Confirmar a exclusão.
-8. Localizar novamente o produto excluído na listagem.
+3. Acessar a tela de listagem de produtos.
+4. Localizar o produto cadastrado pelo nome.
+5. Acionar a opção de exclusão na mesma linha do produto.
+6. Confirmar a exclusão.
+7. Localizar novamente o produto excluído na listagem.
 
 ### Resultado esperado
 
