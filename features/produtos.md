@@ -1,6 +1,6 @@
-# Cenários de Teste - CRUD de Produtos
+# Cenários de Teste - Produtos
 
-Este documento descreve os cenários de teste previstos para validação do CRUD de produtos no frontend do ServeRest.
+Este documento descreve os cenários de teste previstos para validação dos principais fluxos de produtos no frontend do ServeRest.
 
 ## Validar cadastro de produto com dados válidos
 
@@ -8,35 +8,37 @@ Este documento descreve os cenários de teste previstos para validação do CRUD
 
 1. Acessar o frontend do ServeRest.
 2. Realizar login com um usuário administrador válido.
-3. Acessar a funcionalidade de cadastro de produtos.
+3. Acessar a tela de cadastro de produtos.
 4. Preencher os campos obrigatórios do produto com dados válidos.
-5. Confirmar o cadastro do produto.
-6. Acessar a listagem de produtos.
-7. Localizar o produto cadastrado.
+5. Anexar uma imagem válida para o produto.
+6. Confirmar o cadastro do produto.
+7. Acessar a tela de listagem de produtos.
+8. Localizar o produto cadastrado pelo nome.
 
 ### Resultado esperado
 
-O sistema deve cadastrar o produto com sucesso e exibir o produto na listagem com as informações informadas no cadastro.
+O sistema deve cadastrar o produto com sucesso, retornar sucesso na requisição de cadastro e exibir o produto na listagem com as informações informadas.
 
 ---
 
-## Validar edição de produto com dados válidos
+## Validar cadastro de produto com dados em branco
 
 ### Passo a passo
 
 1. Acessar o frontend do ServeRest.
 2. Realizar login com um usuário administrador válido.
-3. Acessar a listagem de produtos.
-4. Localizar um produto previamente cadastrado.
-5. Acessar a opção de edição do produto.
-6. Alterar os dados permitidos do produto.
-7. Confirmar a edição.
-8. Retornar para a listagem de produtos.
-9. Localizar o produto editado.
+3. Acessar a tela de cadastro de produtos.
+4. Não preencher os campos obrigatórios do formulário.
+5. Acionar a opção de cadastrar produto.
 
 ### Resultado esperado
 
-O sistema deve atualizar o produto com sucesso e exibir na listagem as informações alteradas.
+O sistema deve impedir o cadastro do produto e exibir as mensagens de obrigatoriedade dos campos:
+
+- Nome é obrigatório;
+- Preco é obrigatório;
+- Descricao é obrigatório;
+- Quantidade é obrigatório.
 
 ---
 
@@ -46,12 +48,12 @@ O sistema deve atualizar o produto com sucesso e exibir na listagem as informaç
 
 1. Acessar o frontend do ServeRest.
 2. Realizar login com um usuário administrador válido.
-3. Acessar a listagem de produtos.
-4. Localizar um produto previamente cadastrado.
-5. Acionar a opção de exclusão do produto.
-6. Confirmar a exclusão, caso o sistema solicite confirmação.
-7. Retornar para a listagem de produtos.
-8. Localizar o produto excluído.
+3. Cadastrar um produto com dados válidos para ser usado como massa do teste.
+4. Acessar a tela de listagem de produtos.
+5. Localizar o produto cadastrado pelo nome.
+6. Acionar a opção de exclusão na mesma linha do produto.
+7. Confirmar a exclusão.
+8. Localizar novamente o produto excluído na listagem.
 
 ### Resultado esperado
 
