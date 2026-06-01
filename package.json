@@ -1,0 +1,41 @@
+{
+  "name": "server_rest_front",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "cy:open": "cypress open",
+    "cy:run": "cypress run",
+    "cy:run:chrome": "cypress run --browser chrome",
+    "report:clean": "rimraf cypress/reports cypress/screenshots cypress/videos cypress/downloads",
+    "cy:run:report": "npm run report:clean && npm run cy:run",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier . --write",
+    "format:check": "prettier . --check",
+    "prepare": "husky"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rafaelpfranco/server_rest_front.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rafaelpfranco/server_rest_front/issues"
+  },
+  "homepage": "https://github.com/rafaelpfranco/server_rest_front#readme",
+  "devDependencies": {
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
+    "cypress": "^14.5.4",
+    "cypress-mochawesome-reporter": "^3.8.4",
+    "dotenv": "^17.4.2",
+    "eslint": "^9.39.4",
+    "eslint-plugin-cypress": "^6.4.1",
+    "husky": "^9.1.7",
+    "prettier": "^3.8.3",
+    "rimraf": "^5.0.10"
+  }
+}

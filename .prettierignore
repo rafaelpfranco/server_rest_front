@@ -1,0 +1,13 @@
+node_modules/
+
+cypress/reports/
+cypress/screenshots/
+cypress/videos/
+cypress/downloads/
+
+coverage/
+dist/
+build/
+
+package-lock.json
+README.md
