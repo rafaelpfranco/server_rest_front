@@ -1,0 +1,25 @@
+import { criarProduto } from '../../../fixtures/produtos/cadastrarProduto'
+import { CadastrarProdutoPage, ListarProdutosPage } from '../../../support/pages'
+
+describe('Produtos', () => {
+  const cadastrarProdutoPage = new CadastrarProdutoPage()
+  const listarProdutosPage = new ListarProdutosPage()
+
+  beforeEach(() => {
+    cy.login()
+  })
+
+  it('Validar cadastro de produto com dados válidos', () => {
+    const produto = criarProduto()
+
+    cadastrarProdutoPage.visitar()
+    cadastrarProdutoPage.deveEstarCarregada()
+    cadastrarProdutoPage.preencherFormulario(produto)
+    cadastrarProdutoPage.interceptarCadastroProduto()
+    cadastrarProdutoPage.cadastrar()
+    cadastrarProdutoPage.deveCadastrarProdutoComSucesso()
+
+    listarProdutosPage.deveEstarCarregada()
+    listarProdutosPage.deveListarProduto(produto)
+  })
+})
