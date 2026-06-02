@@ -11,10 +11,6 @@ module.exports = defineConfig({
     supportFile: 'cypress/support/e2e.js',
     specPattern: 'cypress/e2e/**/*.cy.js',
   },
-  env: {
-    userEmail: process.env.USER_EMAIL,
-    userPassword: process.env.USER_PASSWORD,
-  },
   video: true,
   screenshotsFolder: 'cypress/screenshots',
   videosFolder: 'cypress/videos',

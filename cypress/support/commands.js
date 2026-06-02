@@ -1,14 +1,14 @@
 import { LoginPage } from './pages'
 
-Cypress.Commands.add('login', () => {
-  const email = Cypress.env('userEmail')
-  const senha = Cypress.env('userPassword')
+Cypress.Commands.add('login', (usuario) => {
+  cy.session(
+    [usuario.email, usuario.password],
+    () => {
+      const loginPage = new LoginPage()
 
-  cy.session([email, senha], () => {
-    const loginPage = new LoginPage()
-
-    loginPage.visitar()
-    loginPage.deveEstarCarregada()
-    loginPage.realizarLogin(email, senha)
-  })
+      loginPage.visitar()
+      loginPage.deveEstarCarregada()
+      loginPage.realizarLogin(usuario.email, usuario.password)
+    },
+  )
 })
