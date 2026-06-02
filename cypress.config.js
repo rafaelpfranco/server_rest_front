@@ -2,6 +2,7 @@ const { defineConfig } = require('cypress')
 require('dotenv').config()
 
 module.exports = defineConfig({
+  projectId: '66nkyu',
   e2e: {
     baseUrl: process.env.BASE_URL || 'https://front.serverest.dev',
     setupNodeEvents(on) {
