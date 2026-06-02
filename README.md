@@ -33,6 +33,8 @@ cypress/
     produtos/
       cadastrarProduto.js
       produto.jpeg
+    usuarios/
+      cadastrarUsuario.js
 
   support/
     commands.js
@@ -45,6 +47,8 @@ cypress/
       produtos/
         CadastrarProdutoPage.js
         ListarProdutosPage.js
+      usuarios/
+        CadastrarUsuarioPage.js
 ```
 
 ## Decisões Técnicas
@@ -54,6 +58,8 @@ O projeto utiliza Cypress com JavaScript e Page Objects.
 As specs descrevem o fluxo dos testes em alto nível, enquanto seletores, interações com tela e validações ficam centralizados nas Pages.
 
 O login utiliza `cy.session()` para reaproveitar a sessão entre os testes.
+
+O usuário administrador utilizado nos testes é criado dinamicamente pela tela de cadastro de usuários antes da execução dos cenários, evitando dependência de massa fixa em ambiente público.
 
 As requisições relevantes são validadas com `cy.intercept()`, como login, cadastro e exclusão de produtos.
 
@@ -73,10 +79,8 @@ npm install
 
 Crie o arquivo `.env` com base no `.env.example`.
 
-```txt
-BASE_URL
-USER_EMAIL
-USER_PASSWORD
+```env
+BASE_URL=https://front.serverest.dev
 ```
 
 ## Execução dos Testes
@@ -143,8 +147,6 @@ A pipeline:
 
 ```txt
 BASE_URL
-USER_EMAIL
-USER_PASSWORD
 CYPRESS_RECORD_KEY
 ```
 
