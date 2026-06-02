@@ -31,7 +31,7 @@ jobs:
         run: npm run format:check
 
       - name: Run Cypress frontend tests
-        run: npm run cy:run -- --record
+        run: npm run cy:run -- --record --group "Frontend E2E"
 
       - name: Upload Cypress reports
         if: always()
