@@ -1,24 +1,25 @@
-# ServeRest Frontend - Testes E2E com Cypress
+# ServeRest Frontend - Testes Automatizados com Cypress
 
-Projeto de automação E2E do frontend do **ServeRest**, desenvolvido com **Cypress** e **JavaScript**.
+Projeto de automação de testes E2E do frontend da aplicação **ServeRest**, desenvolvido com **Cypress** e **JavaScript**.
 
-A suíte cobre cenários relacionados ao fluxo de produtos, validando comportamentos do frontend e chamadas relevantes ao backend por meio de interceptações.
+A suíte valida os principais fluxos de produtos no frontend: cadastro com dados válidos, validação de campos obrigatórios e exclusão de produto cadastrado.
 
 ## Stack
 
-- Cypress
-- JavaScript
-- Dotenv
-- Page Object
-- Mochawesome Reporter
-- ESLint
-- Prettier
-- Husky
-- Commitlint
+* Cypress
+* JavaScript
+* Dotenv
+* Mochawesome Reporter
+* ESLint
+* Prettier
+* Husky
+* Commitlint
+* GitHub Actions
+* Cypress Cloud
 
 ## Objetivo
 
-Validar os principais fluxos frontend relacionados ao CRUD de produtos no ServeRest, garantindo que o sistema permita cadastrar, validar campos obrigatórios e excluir produtos corretamente.
+Validar os principais fluxos frontend de produtos do ServeRest, garantindo que as operações realizadas pela interface reflitam o comportamento esperado do sistema.
 
 ## Estrutura do Projeto
 
@@ -42,6 +43,7 @@ cypress/
     config/
       environment.js
     pages/
+      index.js
       login/
         LoginPage.js
       produtos/
@@ -49,25 +51,26 @@ cypress/
         ListarProdutosPage.js
       usuarios/
         CadastrarUsuarioPage.js
+
+features/
+  produtos.md
 ```
 
-## Decisões Técnicas
+## Arquitetura
 
-O projeto utiliza Cypress com JavaScript e Page Objects.
+O projeto foi organizado em camadas simples:
 
-As specs descrevem o fluxo dos testes em alto nível, enquanto seletores, interações com tela e validações ficam centralizados nas Pages.
-
-O login utiliza `cy.session()` para reaproveitar a sessão entre os testes.
+* `pages`: centralizam seletores, interações e validações das telas;
+* `fixtures`: concentram as massas dinâmicas dos testes;
+* `specs`: descrevem os cenários de teste em alto nível;
+* `commands`: concentram comandos globais, como login com reaproveitamento de sessão.
 
 O usuário administrador utilizado nos testes é criado dinamicamente pela tela de cadastro de usuários antes da execução dos cenários, evitando dependência de massa fixa em ambiente público.
 
-As requisições relevantes são validadas com `cy.intercept()`, como login, cadastro e exclusão de produtos.
-
 ## Pré-requisitos
 
-- Node.js 18 ou superior
-- npm
-- Google Chrome ou Electron
+* Node.js 18 ou superior
+* npm
 
 ## Instalação
 
@@ -91,37 +94,77 @@ Abrir Cypress em modo interativo:
 npm run cy:open
 ```
 
-Executar todos os testes em modo headless:
+Executar todos os testes:
 
 ```bash
 npm run cy:run
 ```
 
-Executar com Chrome:
-
-```bash
-npm run cy:run:chrome
-```
-
-Executar com relatório:
+Executar com relatório local:
 
 ```bash
 npm run cy:run:report
 ```
 
-## Plano de Teste
+## Cenários Automatizados
 
-O plano de teste frontend foi focado nos fluxos principais de produtos, contemplando cenários de cadastro válido, validação de campos obrigatórios e exclusão de produto cadastrado.
+Os cenários automatizados estão implementados na spec:
 
-Os cenários planejados e validados estão documentados em:
+```txt
+cypress/e2e/frontend/produtos/produtos.cy.js
+```
 
+Cenários validados:
+
+* Validar cadastro de produto com dados válidos;
+* Validar cadastro de produto com dados em branco;
+* Validar exclusão de produto cadastrado.
+
+A documentação dos cenários, com passo a passo e resultado esperado, está disponível em:
+
+```txt
 features/produtos.md
+```
 
-## Relatório
+## CI/CD
+
+O projeto possui pipeline no GitHub Actions para execução dos testes E2E frontend.
+
+A pipeline pode ser executada de duas formas:
+
+* manualmente pela aba **Actions** do GitHub;
+* automaticamente quando disparada pela pipeline do projeto backend.
+
+A pipeline realiza:
+
+* instalação das dependências;
+* validação de lint;
+* validação de formatação;
+* execução dos testes frontend;
+* publicação dos artefatos de execução;
+* envio dos resultados para o Cypress Cloud.
+
+## Relatórios
+
+### Cypress Cloud
+
+O relatório das execuções do backend pode ser acessado em:
+
+```txt
+https://cloud.cypress.io/projects/q7vu1q/runs
+```
+
+O relatório das execuções do frontend pode ser acessado em:
+
+```txt
+https://cloud.cypress.io/projects/66nkyu/runs
+```
+
+### Relatório local
 
 O projeto utiliza `cypress-mochawesome-reporter`.
 
-Os relatórios são gerados em:
+Os relatórios locais são gerados em:
 
 ```txt
 cypress/reports/
@@ -129,34 +172,19 @@ cypress/reports/
 
 Os arquivos de relatório, vídeos, screenshots e downloads não são versionados.
 
-## Pipeline
+## Secrets da Pipeline
 
-O projeto possui pipeline no GitHub Actions para execução dos testes E2E frontend.
-
-A pipeline:
-
-- pode ser executada manualmente pela aba Actions;
-- pode ser disparada automaticamente pelo repositório backend;
-- executa lint;
-- valida formatação;
-- executa os testes frontend com Cypress;
-- grava a execução no Cypress Cloud;
-- publica artefatos de relatório, screenshots, vídeos e downloads.
-
-### Secrets necessários
+Secrets necessários no repositório:
 
 ```txt
 BASE_URL
 CYPRESS_RECORD_KEY
 ```
 
-O `CYPRESS_RECORD_KEY` deve ser gerado no Cypress Cloud.
+Observações:
 
-A execução automática a partir do backend ocorre pelo evento:
-
-```txt
-run-front-tests
-```
+* `BASE_URL`: URL base do frontend ServeRest;
+* `CYPRESS_RECORD_KEY`: chave de gravação do Cypress Cloud.
 
 ## Qualidade de Código
 
@@ -190,13 +218,13 @@ O projeto utiliza Husky.
 
 Validações configuradas:
 
-- `pre-commit`: executa ESLint;
-- `commit-msg`: valida o padrão Conventional Commit.
+* `pre-commit`: executa ESLint;
+* `commit-msg`: valida o padrão Conventional Commit.
 
 Exemplo de commit válido:
 
 ```bash
-git commit -m "test: adiciona teste de cadastro de produto"
+git commit -m "test: adiciona testes frontend de produtos"
 ```
 
 ## Conventional Commits
