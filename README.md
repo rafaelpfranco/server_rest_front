@@ -73,10 +73,10 @@ npm install
 
 Crie o arquivo `.env` com base no `.env.example`.
 
-```env
-BASE_URL=https://front.serverest.dev
-USER_EMAIL=seu_email
-USER_PASSWORD=sua_senha
+```txt
+BASE_URL
+USER_EMAIL
+USER_PASSWORD
 ```
 
 ## Execução dos Testes
@@ -124,6 +124,37 @@ cypress/reports/
 ```
 
 Os arquivos de relatório, vídeos, screenshots e downloads não são versionados.
+
+## Pipeline
+
+O projeto possui pipeline no GitHub Actions para execução dos testes E2E frontend.
+
+A pipeline:
+
+- pode ser executada manualmente pela aba Actions;
+- pode ser disparada automaticamente pelo repositório backend;
+- executa lint;
+- valida formatação;
+- executa os testes frontend com Cypress;
+- grava a execução no Cypress Cloud;
+- publica artefatos de relatório, screenshots, vídeos e downloads.
+
+### Secrets necessários
+
+```txt
+BASE_URL
+USER_EMAIL
+USER_PASSWORD
+CYPRESS_RECORD_KEY
+```
+
+O `CYPRESS_RECORD_KEY` deve ser gerado no Cypress Cloud.
+
+A execução automática a partir do backend ocorre pelo evento:
+
+```txt
+run-front-tests
+```
 
 ## Qualidade de Código
 
